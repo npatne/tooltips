@@ -33,7 +33,8 @@ function handleSelectionChange() {
   currentSelection = figma.currentPage.selection[0];
 
   if (figma.currentPage.selection.length == 0) {
-    displayInvalidSelectionMessage();
+    displayInvalidSelectionMessage(); 
+    figma.ui.postMessage("error");
     return;
   }
 

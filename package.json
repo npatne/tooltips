@@ -1,13 +1,13 @@
 {
-  "name": "my-first-plugin",
+  "name": "tooltips",
   "version": "1.0.0",
-  "description": "Your Figma Plugin",
+  "description": "Easy plugin to create tooltips",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "watch": "npm run build -- --watch"
   },
-  "author": "",
+  "author": "Nishad Patne",
   "license": "",
   "devDependencies": {
     "@figma/plugin-typings": "^1.79.0",

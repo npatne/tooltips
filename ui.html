@@ -48,7 +48,7 @@
   <form class="needs-validation" novalidate>
     <div class="mb-4">
       <label for="elementSelect" class="form-label"
-        >Select the layer(in figma) you want to add the tooltip to, the layer
+        >Select the layer (in figma) you want to add the tooltip to, the layer
         name appears here.</label
       >
       <input
@@ -60,7 +60,7 @@
         required
       />
       <div class="invalid-feedback">
-        This is a required field, please select a layer.
+        This is a required field, please select a valid layer.
       </div>
     </div>
 
@@ -183,12 +183,19 @@
     "use strict";
 
     onmessage = (event) => {
-      document.getElementById("elementSelect").value = event.data.pluginMessage;
+      if(event.data.pluginMessage === "error"){
+        document.getElementById("elementSelect").classList.add("is-invalid");
+        document.getElementById("elementSelect").value = null;
+        return;
+      }else{
+        document.getElementById("elementSelect").classList.remove("is-invalid");
+        document.getElementById("elementSelect").value = event.data.pluginMessage;
+      }
     };
 
     const form = document.querySelector("form");
     form.addEventListener("submit", (event) => {
-      if (!form.checkValidity()) {
+      if (!form.checkValidity() || !document.getElementById("elementSelect").value) {
         event.preventDefault();
         event.stopPropagation();
       } else {

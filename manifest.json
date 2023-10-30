@@ -1,5 +1,5 @@
 {
-  "name": "my-first-plugin",
+  "name": "ToolTips",
   "id": "1293329458387901801",
   "api": "1.0.0",
   "main": "code.js",
