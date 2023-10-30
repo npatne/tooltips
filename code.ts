@@ -96,6 +96,8 @@ figma.ui.onmessage = async (pluginMessage) => {
       const tooltipFrame = figma.createFrame();
       tooltipFrame.name = "Tooltip_" + currentSelection.name;
 
+       if (!currentSelection.absoluteBoundingBox) return;
+
       switch (formData.tooltipDirection) {
         case "up":
           tooltipFrame.layoutMode = "VERTICAL";
@@ -104,8 +106,11 @@ figma.ui.onmessage = async (pluginMessage) => {
           tooltipFrame.appendChild(tooltipTextFrame);
           tooltipFrame.appendChild(nib);
 
-          tooltipFrame.x = currentSelection.x;
-          tooltipFrame.y = currentSelection.y - 35;
+          // tooltipFrame.x = currentSelection.x + currentSelection.width/2;
+          // tooltipFrame.y = currentSelection.y - currentSelection.height/2 - 5;
+
+          tooltipFrame.x = currentSelection.absoluteBoundingBox.x + currentSelection.width/2;
+          tooltipFrame.y = currentSelection.absoluteBoundingBox.y - currentSelection.height/2 - 5;
 
           break;
 
@@ -115,8 +120,8 @@ figma.ui.onmessage = async (pluginMessage) => {
           tooltipFrame.appendChild(nib);
           tooltipFrame.appendChild(tooltipTextFrame);
 
-          tooltipFrame.x = currentSelection.x;
-          tooltipFrame.y = currentSelection.y + 35;
+          tooltipFrame.x = currentSelection.absoluteBoundingBox.x + currentSelection.width/2;
+          tooltipFrame.y = currentSelection.absoluteBoundingBox.y + currentSelection.height + 15;
 
           break;
 
@@ -126,8 +131,8 @@ figma.ui.onmessage = async (pluginMessage) => {
           tooltipFrame.appendChild(tooltipTextFrame);
           tooltipFrame.appendChild(nib);
 
-          tooltipFrame.x = currentSelection.x - 70;
-          tooltipFrame.y = currentSelection.y;
+          tooltipFrame.x = currentSelection.absoluteBoundingBox.x - currentSelection.width/4;
+          tooltipFrame.y = currentSelection.absoluteBoundingBox.y + currentSelection.height/2;
 
           break;
 
@@ -137,8 +142,8 @@ figma.ui.onmessage = async (pluginMessage) => {
           tooltipFrame.appendChild(nib);
           tooltipFrame.appendChild(tooltipTextFrame);
 
-          tooltipFrame.x = currentSelection.x + 70;
-          tooltipFrame.y = currentSelection.y;
+          tooltipFrame.x = currentSelection.absoluteBoundingBox.x + currentSelection.width + 10;
+          tooltipFrame.y = currentSelection.absoluteBoundingBox.y + currentSelection.height/2 - 5;
 
           break;
       }
